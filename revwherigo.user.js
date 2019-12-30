@@ -8,7 +8,12 @@
 
 function revwhereigo_crack() {
     var userText = $('.UserSuppliedContent').text()
-    var codes = userText.match(/^[0-9]{6}$/gm).join(' ')
+    var allCodes = userText.match(/^[0-9]{6}$/gm)
+    if (allCodes.length != 3) {
+        console.log('revwhereigo: Too few or too many codes found' + allCodes)
+        allCodes = allCodes.slice(0, 3)
+    }
+    var codes = allCodes.join(' ')
 
     // $ curl 'https://gc.de/async.php' --data 'decoded=104143 577896 165623&key=&encoded=&method=reversewherigo&decode=&encode=1'
     // {"decoded":"104143 577896 165623","key":"","encoded":"N 49\u00b0 45.674 E 013\u00b0 51.280","method":"reversewherigo","replace_encoded":0,"message":""}
