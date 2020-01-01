@@ -1,9 +1,11 @@
 // ==UserScript==
-// @name     revwhereigo
-// @version  0.1
-// @include  http://www.geocaching.com/*
-// @include  https://www.geocaching.com/*
-// @grant    none
+// @name            revwhereigo
+// @author          https://github.com/avogadogc
+// @description     Solve Reverse Whereigo caches by one click!
+// @version         0.2
+// @include         http://www.geocaching.com/geocache/*
+// @include         https://www.geocaching.com/geocache/*
+// @grant           none
 // ==/UserScript==
 
 function revwhereigo_crack() {
@@ -21,7 +23,6 @@ function revwhereigo_crack() {
         'https://gc.de/async.php',
         {method: 'reversewherigo', decoded: codes, encode: 1},
         function(data, status) {
-            console.log('FLARE')
             if (data.message != '') {
                 var msg = 'revwhereigo: Failed to decode the codes: ' + codes + '. "' + data.message + '"'
                 console.log(msg)
