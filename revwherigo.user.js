@@ -14,7 +14,7 @@ function revwhereigo_crack() {
     var userText = $('.UserSuppliedContent').text()
     var allCodes = userText.match(/^[0-9]{6}$/gm)
     if (allCodes.length != 3) {
-        console.log('revwhereigo: Too few or too many codes found' + allCodes)
+        console.log('revwhereigo: Too few or too many codes found ' + allCodes)
         allCodes = allCodes.slice(0, 3)
     }
     var codes = allCodes.join('+')
@@ -33,17 +33,25 @@ function revwhereigo_crack() {
             if (data.message != '') {
                 console.log('revwhereigo: Failed to decode the codes: ' + codes + '. "' + data.message + '"')
             } else {
-                console.log("revwhereigo: Updating cache note with " + data.encoded)
+                console.log("revwhereigo: Fetched solution " + data.encoded)
                 revwhereigo_update_note(data.encoded)
             }
         }
     });
+
     return false
 }
 
 function revwhereigo_update_note(solution) {
-    var rendered = $('#viewCacheNote')
+    var line = "CRACKED:" + solution
+    var rendered = $('span#viewCacheNote')
     if (rendered.is(':visible')) {
+
+        if (rendered.text().includes(line)) {
+            console.log('revwhereigo: Solution already present in note')
+            return
+        }
+
         rendered.click()
     } else {
         console.log('revwhereigo: Note already open')
@@ -52,14 +60,8 @@ function revwhereigo_update_note(solution) {
     var textarea = $('#cacheNoteText')
     if (textarea.is(':visible')) {
         textarea = textarea[0]
-        var line = "CRACKED:" + solution
-        if (textarea.value.includes(line)) {
-            // TODO do not open and save when not needed
-            console.log('revwhereigo: Solution already present in note')
-        } else {
-            console.log('revwhereigo: Appending solution')
-            textarea.value += ("\n" + line)
-        }
+        console.log('revwhereigo: Appending solution')
+        textarea.value += ("\n" + line)
     } else {
         console.log('revwhereigo: Area not open')
     }
