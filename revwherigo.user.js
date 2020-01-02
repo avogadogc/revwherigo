@@ -2,7 +2,7 @@
 // @name            revwhereigo
 // @author          https://github.com/avogadogc
 // @description     Solve Reverse Whereigo caches by one click!
-// @version         0.2
+// @version         0.3
 // @include         http://www.geocaching.com/geocache/*
 // @include         https://www.geocaching.com/geocache/*
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
