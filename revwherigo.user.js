@@ -44,13 +44,16 @@ function revwhereigo_crack() {
 
 function revwhereigo_update_note(solution) {
     var line = "CRACKED:" + solution
-    var rendered = $('span#viewCacheNote')
-    if (rendered.is(':visible')) {
+    var rendered = $('#viewCacheNote')
 
-        if (rendered.text().includes(line)) {
-            console.log('revwhereigo: Solution already present in note')
-            return
-        }
+    if (rendered.text().includes(line)) {
+        console.log('revwhereigo: Solution already present in note')
+        alert('revwhereigo: Solution already present in note')
+        return
+    }
+
+
+    if (rendered.is(':visible')) {
 
         rendered.click()
     } else {
