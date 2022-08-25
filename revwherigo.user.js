@@ -2,7 +2,7 @@
 // @name            revwhereigo
 // @author          https://github.com/avogadogc
 // @description     Solve Reverse Whereigo caches by one click!
-// @version         0.3
+// @version         1.0
 // @include         http://www.geocaching.com/geocache/*
 // @include         https://www.geocaching.com/geocache/*
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
@@ -43,33 +43,23 @@ function revwhereigo_crack() {
 }
 
 function revwhereigo_update_note(solution) {
-    var line = "CRACKED:" + solution
-    var rendered = $('#viewCacheNote')
+    var coordsBar = $('#uxLatLon')
+    coordsBar.click()
+    console.log('opened')
 
-    if (rendered.text().includes(line)) {
-        console.log('revwhereigo: Solution already present in note')
-        alert('revwhereigo: Solution already present in note')
-        return
-    }
+    setTimeout(function(){
+        var newCoords = $('#newCoordinates')
+        newCoords.val(solution)
+        console.log('pasted')
+        $('#coordinateParse button').click()
+        console.log('submitted')
+        setTimeout(function(){
+            let accept = $('#coordinateParseVerify .btn-cc-accept')
+            accept.click()
+            console.log('accepted')
+        }, 500)
+    }, 200);
 
-
-    if (rendered.is(':visible')) {
-
-        rendered.click()
-    } else {
-        console.log('revwhereigo: Note already open')
-    }
-
-    var textarea = $('#cacheNoteText')
-    if (textarea.is(':visible')) {
-        textarea = textarea[0]
-        console.log('revwhereigo: Appending solution')
-        textarea.value += ("\n" + line)
-    } else {
-        console.log('revwhereigo: Area not open')
-    }
-    console.log('revwhereigo: Saving')
-    $('#editCacheNote button:contains("Save")').click()
 }
 
 (function() {
@@ -79,8 +69,11 @@ function revwhereigo_update_note(solution) {
     if (typeIndicator != 'Wherigo Cache') return;
 
     var button = document.createElement('a')
-    button.appendChild(document.createTextNode("Crack!"))
-    button.setAttribute('href', '#')
+    button.classList.add('btn', 'btn-primary')
+    button.style.fontSize = '2em'
+    button.style.borderColor = button.style.backgroundColor = 'blue'
+    button.appendChild(document.createTextNode("↬ Unreverse Whereigo ↬"))
     button.onclick = revwhereigo_crack
-    $('h2')[0].appendChild(button)
+    var table = $('#ctl00_ContentBody_CacheInformationTable')[0]
+    table.parentElement.insertBefore(button, table)
 }());
