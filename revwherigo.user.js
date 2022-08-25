@@ -72,6 +72,7 @@ function revwhereigo_update_note(solution) {
     button.classList.add('btn', 'btn-primary')
     button.style.fontSize = '2em'
     button.style.borderColor = button.style.backgroundColor = 'blue'
+    button.style.marginBottom = '1rem'
     button.appendChild(document.createTextNode("↬ Unreverse Whereigo ↬"))
     button.onclick = revwhereigo_crack
     var table = $('#ctl00_ContentBody_CacheInformationTable')[0]
