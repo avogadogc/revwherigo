@@ -1,12 +1,12 @@
 ---
 name: "revwhereigo is not working"
-about: "Bug Reports"
+about: "Bug Report"
 ---
 
-<!--- Before filing a bug report, make sure that you are using the latest version of the script. -->
-<!--- Follow the install instructions to upgrade, or verify that the version you use the the latest one. -->
+<!--- Before filing a bug report, make sure that you are using the latest version of the revwhereigo script. -->
+<!--- Follow the install instructions to upgrade, or verify that the version you use the latest one. -->
 
-## The problem
+## Problem Description
 
 <!--- Be as detailed as you can. -->
 <!--- Does it happen every time? -->
