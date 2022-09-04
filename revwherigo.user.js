@@ -45,18 +45,18 @@ function revwhereigo_crack() {
 function revwhereigo_update_note(solution) {
     var coordsBar = $('#uxLatLon')
     coordsBar.click()
-    console.log('opened')
+    console.log('revwhereigo: opened')
 
     setTimeout(function(){
         var newCoords = $('#newCoordinates')
         newCoords.val(solution)
-        console.log('pasted')
+        console.log('revwhereigo: pasted')
         $('#coordinateParse button').click()
-        console.log('submitted')
+        console.log('revwhereigo: submitted')
         setTimeout(function(){
             let accept = $('#coordinateParseVerify .btn-cc-accept')
             accept.click()
-            console.log('accepted')
+            console.log('revwhereigo: accepted')
         }, 500)
     }, 200);
 
