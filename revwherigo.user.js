@@ -13,8 +13,12 @@
 function revwhereigo_crack() {
     var userText = $('.UserSuppliedContent').text()
     var allCodes = userText.match(/^[0-9]{6}$/gm)
-    if (allCodes.length != 3) {
-        console.log('revwhereigo: Too few or too many codes found ' + allCodes)
+    if (allCodes === null || allCodes.length < 3) {
+        window.alert('Cannot find 3 codes in listing. Found: ' + allCodes)
+        return false
+    }
+    if (allCodes.length > 3) {
+        console.log('Too few codes found: ' + allCodes)
         allCodes = allCodes.slice(0, 3)
     }
     var codes = allCodes.join('+')
@@ -31,9 +35,9 @@ function revwhereigo_crack() {
         onload: function(response) {
             var data = JSON.parse(response.responseText)
             if (data.message != '') {
-                console.log('revwhereigo: Failed to decode the codes: ' + codes + '. "' + data.message + '"')
+                console.log('Failed to decode the codes: ' + codes + '. "' + data.message + '"')
             } else {
-                console.log("revwhereigo: Fetched solution " + data.encoded)
+                console.log("Fetched solution " + data.encoded)
                 revwhereigo_update_note(data.encoded)
             }
         }
@@ -45,18 +49,18 @@ function revwhereigo_crack() {
 function revwhereigo_update_note(solution) {
     var coordsBar = $('#uxLatLon')
     coordsBar.click()
-    console.log('revwhereigo: opened')
+    console.log('opened')
 
     setTimeout(function(){
         var newCoords = $('#newCoordinates')
         newCoords.val(solution)
-        console.log('revwhereigo: pasted')
+        console.log('pasted')
         $('#coordinateParse button').click()
-        console.log('revwhereigo: submitted')
+        console.log('submitted')
         setTimeout(function(){
             let accept = $('#coordinateParseVerify .btn-cc-accept')
             accept.click()
-            console.log('revwhereigo: accepted')
+            console.log('accepted')
         }, 500)
     }, 200);
 
@@ -78,4 +82,3 @@ function revwhereigo_update_note(solution) {
     var table = $('#ctl00_ContentBody_CacheInformationTable')[0]
     table.parentElement.insertBefore(button, table)
 }());
-
