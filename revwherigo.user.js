@@ -11,14 +11,16 @@
 // ==/UserScript==
 
 function revwhereigo_crack() {
-    var userText = $('.UserSuppliedContent').text()
+    // Read from isting or the personal note, the latter is usefull when hidden/obscured/etc.
+    var userText = $('.UserSuppliedContent').text() + $('.PersonalCacheNote').text()
+
     var allCodes = userText.match(/^[0-9]{6}$/gm)
     if (allCodes === null || allCodes.length < 3) {
-        window.alert('Cannot find 3 codes in listing. Found: ' + allCodes)
+        window.alert('Cannot find 3 codes in listing or note. Found: ' + allCodes)
         return false
     }
     if (allCodes.length > 3) {
-        console.log('Too few codes found: ' + allCodes)
+        console.log('Too many codes found: ' + allCodes)
         allCodes = allCodes.slice(0, 3)
     }
     var codes = allCodes.join('+')
@@ -82,3 +84,4 @@ function revwhereigo_update_note(solution) {
     var table = $('#ctl00_ContentBody_CacheInformationTable')[0]
     table.parentElement.insertBefore(button, table)
 }());
+
