@@ -14,9 +14,11 @@ function revwhereigo_crack() {
     // Read from isting or the personal note, the latter is usefull when hidden/obscured/etc.
     var userText = $('.UserSuppliedContent').text() + $('.PersonalCacheNote').text()
 
-    var allCodes = userText.match(/^[0-9]{6}$/gm)
+    var allCodes = userText.match(/\b[0-9]{6}\b/gm)
     if (allCodes === null || allCodes.length < 3) {
-        window.alert('Cannot find 3 codes in listing or note. Found: ' + allCodes)
+        var msg = 'Cannot find 3 codes in listing or note. Found: ' + allCodes
+        console.log(msg + ' in ' + userText)
+        window.alert(msg)
         return false
     }
     if (allCodes.length > 3) {
